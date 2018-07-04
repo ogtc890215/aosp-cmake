@@ -1,0 +1,184 @@
+project(libhwui)
+
+set(HWUI_ROOT ${ANDROID_ROOT}/frameworks/base/libs/hwui)
+
+set(SOURCE_FILES
+        ${HWUI_ROOT}/debug/wrap_gles.cpp
+        ${HWUI_ROOT}/debug/DefaultGlesDriver.cpp
+        ${HWUI_ROOT}/debug/GlesErrorCheckWrapper.cpp
+        ${HWUI_ROOT}/debug/GlesDriver.cpp
+        ${HWUI_ROOT}/debug/FatalBaseDriver.cpp
+        ${HWUI_ROOT}/debug/NullGlesDriver.cpp
+
+        ${HWUI_ROOT}/hwui/Bitmap.cpp
+        ${HWUI_ROOT}/font/CacheTexture.cpp
+        ${HWUI_ROOT}/font/Font.cpp
+        ${HWUI_ROOT}/hwui/Canvas.cpp
+        ${HWUI_ROOT}/hwui/MinikinSkia.cpp
+        ${HWUI_ROOT}/hwui/MinikinUtils.cpp
+        ${HWUI_ROOT}/hwui/PaintImpl.cpp
+        ${HWUI_ROOT}/hwui/Typeface.cpp
+        ${HWUI_ROOT}/pipeline/skia/GLFunctorDrawable.cpp
+        ${HWUI_ROOT}/pipeline/skia/LayerDrawable.cpp
+        ${HWUI_ROOT}/pipeline/skia/RenderNodeDrawable.cpp
+        ${HWUI_ROOT}/pipeline/skia/ReorderBarrierDrawables.cpp
+        ${HWUI_ROOT}/pipeline/skia/SkiaDisplayList.cpp
+        ${HWUI_ROOT}/pipeline/skia/SkiaOpenGLPipeline.cpp
+        ${HWUI_ROOT}/pipeline/skia/SkiaOpenGLReadback.cpp
+        ${HWUI_ROOT}/pipeline/skia/SkiaPipeline.cpp
+        ${HWUI_ROOT}/pipeline/skia/SkiaProfileRenderer.cpp
+        ${HWUI_ROOT}/pipeline/skia/SkiaRecordingCanvas.cpp
+        ${HWUI_ROOT}/pipeline/skia/SkiaVulkanPipeline.cpp
+        ${HWUI_ROOT}/pipeline/skia/VectorDrawableAtlas.cpp
+        ${HWUI_ROOT}/renderstate/Blend.cpp
+        ${HWUI_ROOT}/renderstate/MeshState.cpp
+        ${HWUI_ROOT}/renderstate/OffscreenBufferPool.cpp
+        ${HWUI_ROOT}/renderstate/PixelBufferState.cpp
+        ${HWUI_ROOT}/renderstate/RenderState.cpp
+        ${HWUI_ROOT}/renderstate/Scissor.cpp
+        ${HWUI_ROOT}/renderstate/Stencil.cpp
+        ${HWUI_ROOT}/renderstate/TextureState.cpp
+        ${HWUI_ROOT}/renderthread/CacheManager.cpp
+        ${HWUI_ROOT}/renderthread/CanvasContext.cpp
+        ${HWUI_ROOT}/renderthread/OpenGLPipeline.cpp
+        ${HWUI_ROOT}/renderthread/DrawFrameTask.cpp
+        ${HWUI_ROOT}/renderthread/EglManager.cpp
+        ${HWUI_ROOT}/renderthread/VulkanManager.cpp
+        ${HWUI_ROOT}/renderthread/RenderProxy.cpp
+        ${HWUI_ROOT}/renderthread/RenderTask.cpp
+        ${HWUI_ROOT}/renderthread/RenderThread.cpp
+        ${HWUI_ROOT}/renderthread/TimeLord.cpp
+        ${HWUI_ROOT}/renderthread/Frame.cpp
+        ${HWUI_ROOT}/service/GraphicsStatsService.cpp
+        ${HWUI_ROOT}/thread/TaskManager.cpp
+        ${HWUI_ROOT}/utils/Blur.cpp
+        ${HWUI_ROOT}/utils/Color.cpp
+        ${HWUI_ROOT}/utils/GLUtils.cpp
+        ${HWUI_ROOT}/utils/LinearAllocator.cpp
+        ${HWUI_ROOT}/utils/StringUtils.cpp
+        ${HWUI_ROOT}/utils/TestWindowContext.cpp
+        ${HWUI_ROOT}/utils/VectorDrawableUtils.cpp
+        ${HWUI_ROOT}/AmbientShadow.cpp
+        ${HWUI_ROOT}/AnimationContext.cpp
+        ${HWUI_ROOT}/Animator.cpp
+        ${HWUI_ROOT}/AnimatorManager.cpp
+        ${HWUI_ROOT}/BakedOpDispatcher.cpp
+        ${HWUI_ROOT}/BakedOpRenderer.cpp
+        ${HWUI_ROOT}/BakedOpState.cpp
+        ${HWUI_ROOT}/Caches.cpp
+        ${HWUI_ROOT}/CanvasState.cpp
+        ${HWUI_ROOT}/ClipArea.cpp
+        ${HWUI_ROOT}/DamageAccumulator.cpp
+        ${HWUI_ROOT}/DeferredLayerUpdater.cpp
+        ${HWUI_ROOT}/DeviceInfo.cpp
+        ${HWUI_ROOT}/DisplayList.cpp
+        ${HWUI_ROOT}/Extensions.cpp
+        ${HWUI_ROOT}/FboCache.cpp
+        ${HWUI_ROOT}/FontRenderer.cpp
+        ${HWUI_ROOT}/FrameBuilder.cpp
+        ${HWUI_ROOT}/FrameInfo.cpp
+        ${HWUI_ROOT}/FrameInfoVisualizer.cpp
+        ${HWUI_ROOT}/GammaFontRenderer.cpp
+        ${HWUI_ROOT}/GlLayer.cpp
+        ${HWUI_ROOT}/GlopBuilder.cpp
+        ${HWUI_ROOT}/GpuMemoryTracker.cpp
+        ${HWUI_ROOT}/GradientCache.cpp
+        ${HWUI_ROOT}/Image.cpp
+        ${HWUI_ROOT}/Interpolator.cpp
+        ${HWUI_ROOT}/JankTracker.cpp
+        ${HWUI_ROOT}/Layer.cpp
+        ${HWUI_ROOT}/LayerBuilder.cpp
+        ${HWUI_ROOT}/LayerUpdateQueue.cpp
+        ${HWUI_ROOT}/Matrix.cpp
+        ${HWUI_ROOT}/OpDumper.cpp
+        ${HWUI_ROOT}/OpenGLReadback.cpp
+        ${HWUI_ROOT}/Patch.cpp
+        ${HWUI_ROOT}/PatchCache.cpp
+        ${HWUI_ROOT}/PathCache.cpp
+        ${HWUI_ROOT}/PathParser.cpp
+        ${HWUI_ROOT}/PathTessellator.cpp
+        ${HWUI_ROOT}/PixelBuffer.cpp
+        ${HWUI_ROOT}/ProfileData.cpp
+        ${HWUI_ROOT}/ProfileDataContainer.cpp
+        ${HWUI_ROOT}/ProfileRenderer.cpp
+        ${HWUI_ROOT}/Program.cpp
+        ${HWUI_ROOT}/ProgramCache.cpp
+        ${HWUI_ROOT}/Properties.cpp
+        ${HWUI_ROOT}/PropertyValuesAnimatorSet.cpp
+        ${HWUI_ROOT}/PropertyValuesHolder.cpp
+        ${HWUI_ROOT}/RecordingCanvas.cpp
+        ${HWUI_ROOT}/RenderBufferCache.cpp
+        ${HWUI_ROOT}/RenderNode.cpp
+        ${HWUI_ROOT}/RenderProperties.cpp
+        ${HWUI_ROOT}/ResourceCache.cpp
+        ${HWUI_ROOT}/ShadowTessellator.cpp
+        ${HWUI_ROOT}/SkiaCanvas.cpp
+        ${HWUI_ROOT}/SkiaCanvasProxy.cpp
+        ${HWUI_ROOT}/SkiaShader.cpp
+        ${HWUI_ROOT}/Snapshot.cpp
+        ${HWUI_ROOT}/SpotShadow.cpp
+        ${HWUI_ROOT}/TessellationCache.cpp
+        ${HWUI_ROOT}/TextDropShadowCache.cpp
+        ${HWUI_ROOT}/Texture.cpp
+        ${HWUI_ROOT}/TextureCache.cpp
+        ${HWUI_ROOT}/VectorDrawable.cpp
+        ${HWUI_ROOT}/VkLayer.cpp
+
+        ${INTERMEDIATES_ROOT}/frameworks/base/libplatformprotos/android_arm64_armv8-a_cortex-a53_static_core/gen/proto/frameworks/base/core/proto/android/service/graphicsstats.pb.cc
+        ${INTERMEDIATES_ROOT}/frameworks/base/libs/hwui/libhwui/android_arm64_armv8-a_cortex-a53_static_core/gen/proto/frameworks/base/libs/hwui/protos/hwui.pb.cc
+        )
+
+include_directories(${ANDROID_ROOT}/frameworks/native/include)
+include_directories(${ANDROID_ROOT}/external/skia/include/private)
+include_directories(${ANDROID_ROOT}/external/skia/src/core)
+include_directories(${ANDROID_ROOT}/external/skia/src/effects)
+include_directories(${ANDROID_ROOT}/external/skia/src/image)
+include_directories(${ANDROID_ROOT}/external/skia/src/utils)
+include_directories(${ANDROID_ROOT}/external/skia/src/gpu)
+
+include_directories(${INTERMEDIATES_ROOT}/frameworks/base/libplatformprotos/android_arm64_armv8-a_cortex-a53_static_core/gen/proto)
+include_directories(${INTERMEDIATES_ROOT}/frameworks/base/libs/hwui/libhwui/android_arm64_armv8-a_cortex-a53_static_core/gen/proto/frameworks/base/libs/hwui)
+include_directories(${INTERMEDIATES_ROOT}/frameworks/base/libs/hwui/libhwui/android_arm64_armv8-a_cortex-a53_static_core/gen/proto)
+
+add_library(libhwui SHARED ${SOURCE_FILES})
+target_include_directories(libhwui PUBLIC
+        ${HWUI_ROOT}
+        ${ANDROID_ROOT}/frameworks/rs
+        ${ANDROID_ROOT}/frameworks/rs/cpp
+        )
+target_compile_definitions(libhwui PRIVATE
+        -DEGL_EGLEXT_PROTOTYPES
+        -DGL_GLEXT_PROTOTYPES
+        -DATRACE_TAG=ATRACE_TAG_VIEW
+        -DLOG_TAG=\"OpenGLRenderer\"
+
+        -DUSE_HWC2
+        -DDEBUG_OPENGL=3
+        )
+target_compile_options(libhwui PRIVATE
+        -Wall
+        -Wno-unused-parameter
+        -Wunreachable-code
+        -Werror
+        -fvisibility=hidden
+        #        -Wno-free-nonheap-object
+        -Wno-missing-braces
+        -include debug/wrap_gles.h
+        )
+target_link_libraries(libhwui
+        liblog
+        libcutils
+        libutils
+        libEGL
+        libGLESv2
+        libvulkan
+        libskia
+        libui
+        libgui
+        libprotobuf-cpp-lite
+        libharfbuzz_ng
+        libft2
+        libminikin
+        libandroidfw
+        libRScpp
+        )

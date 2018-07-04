@@ -1,0 +1,31 @@
+set(LOCAL_PATH ${KERNEL_ROOT}/kernel/sched)
+
+set(SOURCE_FILES "")
+
+add_c_source(SOURCE_FILES ${LOCAL_PATH} core)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} clock)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} cputime)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} idle_task)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} fair)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} rt)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} stop_task)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} sched_avg)
+
+if (${CONFIG_SMP})
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} cpupri)
+endif ()
+if (${CONFIG_SCHED_AUTOGROUP})
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} auto_group)
+endif ()
+if (${CONFIG_SCHEDSTATS})
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} stats)
+endif ()
+if (${CONFIG_SCHED_DEBUG})
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} debug)
+endif ()
+if (${CONFIG_CGROUP_CPUACCT})
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} cpuacct)
+endif ()
+
+add_library(kernel-sched STATIC ${SOURCE_FILES})
+

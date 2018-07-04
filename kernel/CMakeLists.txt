@@ -1,0 +1,83 @@
+cmake_minimum_required(VERSION 3.10)
+set(CMAKE_VERBOSE_MAKEFILE on)
+project(kernel)
+
+set(CMAKE_SHARED_LIBRARY_SUFFIX_C .so)
+set(CMAKE_SHARED_LIBRARY_SUFFIX_CXX .so)
+set(CMAKE_SHARED_LIBRARY_PREFIX_C "")
+set(CMAKE_SHARED_LIBRARY_PREFIX_CXX "")
+set(CMAKE_STATIC_LIBRARY_PREFIX_C "")
+set(CMAKE_STATIC_LIBRARY_PREFIX_CXX "")
+
+set(ANDROID_ROOT /Volumes/android)
+set(KERNEL_ROOT ${ANDROID_ROOT}/kernel/msm)
+
+include(bullhead_config.cmake)
+
+set(CROSS_COMPILE_PREFIX ${ANDROID_ROOT}/prebuilts/gcc/darwin-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-)
+set(CMAKE_C_COMPILER ${CROSS_COMPILE_PREFIX}gcc)
+set(CMAKE_CXX_COMPILER ${CROSS_COMPILE_PREFIX}g++)
+set(CMAKE_AR ${CROSS_COMPILE_PREFIX}ar)
+set(CMAKE_RANLIB ${CROSS_COMPILE_PREFIX}ranlib)
+
+set_property(DIRECTORY PROPERTY INCLUDE_DIRECTORIES "")
+set_property(DIRECTORY PROPERTY LINK_LIBRARIES "")
+
+include_directories(SYSTEM ${ANDROID_ROOT}/prebuilts/gcc/darwin-x86/aarch64/aarch64-linux-android-4.9/lib/gcc/aarch64-linux-android/4.9.x/include)
+include_directories(${KERNEL_ROOT}/arch/arm64/include)
+include_directories(${KERNEL_ROOT}/arch/arm64/include/generated)
+include_directories(${KERNEL_ROOT}/include)
+include_directories(${KERNEL_ROOT}/arch/arm64/include/uapi)
+include_directories(${KERNEL_ROOT}/arch/arm64/include/generated/uapi)
+include_directories(${KERNEL_ROOT}/include/uapi)
+include_directories(${KERNEL_ROOT}/include/generated/uapi)
+
+set(KCONFIG_H ${KERNEL_ROOT}/include/linux/kconfig.h)
+
+set(CMAKE_C_FLAGS "-nostdinc")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -include ${KCONFIG_H}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D__KERNEL__")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mlittle-endian")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wundef")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wstrict-prototypes")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-trigraphs")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-strict-aliasing")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror-implicit-function-declaration")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-format-security")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-delete-null-pointer-checks")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Os")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-maybe-uninitialized")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mgeneral-regs-only")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wframe-larger-than=2048")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fstack-protector-strong")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-unused-but-set-variable")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-omit-frame-pointer")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-optimize-sibling-calls")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-var-tracking-assignments")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wdeclaration-after-statement")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-pointer-sign")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-strict-overflow")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fconserve-stack")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DCC_HAVE_ASM_GOTO")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D\"KBUILD_STR(s)=#s\"")
+
+
+function(add_c_source var dir basename)
+    set_property(SOURCE ${dir}/${basename}.c PROPERTY
+            COMPILE_DEFINITIONS "KBUILD_BASENAME=KBUILD_STR\(${basename}\)" "KBUILD_MODNAME=KBUILD_STR\(${basename}\)"
+            )
+    set_property(SOURCE ${dir}/${basename}.c PROPERTY
+            COMPILE_FLAGS "-Wp,-MD,${dir}/.${basename}.o.d"
+            )
+    set(${var} ${${var}} ${dir}/${basename}.c PARENT_SCOPE)
+endfunction()
+
+add_subdirectory(msm/drivers)
+add_subdirectory(msm/fs)
+add_subdirectory(msm/kernel)
+add_subdirectory(msm/lib)
+add_subdirectory(msm/mm)
+add_subdirectory(msm/security)

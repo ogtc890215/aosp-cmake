@@ -1,0 +1,22 @@
+set(LOCAL_PATH ${KERNEL_ROOT}/security/tomoyo)
+
+set(SOURCE_FILES "")
+
+add_c_source(SOURCE_FILES ${LOCAL_PATH} audit)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} common)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} condition)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} domain)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} environ)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} file)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} gc)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} group)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} load_policy)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} memory)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} mount)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} network)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} realpath)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} securityfs_if)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} tomoyo)
+add_c_source(SOURCE_FILES ${LOCAL_PATH} util)
+
+add_library(security-tomoyo STATIC ${SOURCE_FILES})
