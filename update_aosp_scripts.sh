@@ -59,7 +59,7 @@ for file in `find ${KERNEL_ROOT} -type f -name CMakeLists.txt`; do
         mkdir -p "${dir}"
     fi
 
-    copyIfUpdated $file ${file#*${ANDROID_ROOT}/}
+    copyIfUpdated "$file" "${file#*${ANDROID_ROOT}/}"
 done
 unset dir
 

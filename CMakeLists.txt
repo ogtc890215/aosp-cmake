@@ -6,6 +6,8 @@ project(aosp)
 # environment variables
 set(ANDROID_ROOT /Volumes/android)
 set(INTERMEDIATES_ROOT ${ANDROID_ROOT}/out/soong/.intermediates)
+set(TARGET_BOARD_PLATFORM msm8998)
+
 # build toolchains
 set(CMAKE_C_COMPILER ${ANDROID_ROOT}/prebuilts/clang/host/darwin-x86/clang-stable/bin/clang)
 set(CMAKE_CXX_COMPILER ${ANDROID_ROOT}/prebuilts/clang/host/darwin-x86/clang-stable/bin/clang++)
@@ -234,6 +236,7 @@ add_subdirectory(external/sonivox/arm-wt-22k)
 add_subdirectory(external/speex)
 add_subdirectory(external/sqlite)
 add_subdirectory(external/tinyalsa)
+add_subdirectory(external/tinycompress)
 add_subdirectory(external/tinyxml2)
 add_subdirectory(external/toybox)
 add_subdirectory(external/tremolo)
@@ -347,6 +350,10 @@ add_subdirectory(hardware/interfaces/power/1.0)
 add_subdirectory(hardware/interfaces/soundtrigger/2.0)
 add_subdirectory(hardware/libhardware)
 add_subdirectory(hardware/libhardware_legacy)
+add_subdirectory(hardware/qcom/audio/hal)
+add_subdirectory(hardware/qcom/audio/post_proc)
+add_subdirectory(hardware/qcom/audio/visualizer)
+add_subdirectory(hardware/qcom/audio/voice_processing)
 
 add_subdirectory(libnativehelper)
 
