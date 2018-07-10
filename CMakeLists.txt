@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.6)
 # Debug
 set(CMAKE_VERBOSE_MAKEFILE on)
-project(aosp)
 
 # environment variables
 set(ANDROID_ROOT /Volumes/android)
@@ -23,6 +22,9 @@ set(CMAKE_STATIC_LIBRARY_PREFIX_CXX "")
 
 set(CMAKE_SHARED_LIBRARY_CREATE_C_FLAGS "-shared")
 set(CMAKE_SHARED_LIBRARY_CREATE_CXX_FLAGS "-shared")
+
+# main project
+project(aosp)
 
 # Common Includes
 include_directories(SYSTEM "${ANDROID_ROOT}/bionic/libc/arch-arm64/include")
