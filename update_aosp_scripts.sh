@@ -1,11 +1,12 @@
 #!/bin/bash
+FORCE_COPY=false
 ANDROID_ROOT=/Volumes/android
 ROOT_CMAKE_SCRIPT=${ANDROID_ROOT}/CMakeLists.txt
 
 function copyIfUpdated()
 {
     if [ $# -ne 2 ]; then exit 1; fi
-    if [[ ( ! -e "$2" ) || "$1" -nt "$2" ]]; then
+    if [[ ( $FORCE_COPY = "true" ) || ( ! -e "$2" ) || "$1" -nt "$2" ]]; then
         cp "$1" "$2"
         echo "$2"
     fi
