@@ -718,7 +718,6 @@
       <file path="$PROJECT_DIR$/frameworks/native/libs/binder/tests" />
       <file path="$PROJECT_DIR$/frameworks/native/libs/diskusage" />
       <file path="$PROJECT_DIR$/frameworks/native/libs/gui/tests" />
-      <file path="$PROJECT_DIR$/frameworks/native/libs/hwc2on1adapter" />
       <file path="$PROJECT_DIR$/frameworks/native/libs/input/tests" />
       <file path="$PROJECT_DIR$/frameworks/native/libs/math/tests" />
       <file path="$PROJECT_DIR$/frameworks/native/libs/nativewindow/tests" />

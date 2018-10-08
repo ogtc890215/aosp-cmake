@@ -1,0 +1,45 @@
+set(LOCAL_PATH ${KERNEL_ROOT}/drivers/staging/android/ion)
+
+set(SOURCE_FILES "")
+
+if (${CONFIG_ION})
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} ion)
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} ion_heap)
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} ion_page_pool)
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} ion_system_heap)
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} ion_carveout_heap)
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} ion_chunk_heap)
+
+endif ()
+if (${CONFIG_CMA})
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} ion_cma_heap)
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} ion_cma_secure_heap)
+
+endif ()
+if (${CONFIG_ION_TEST})
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} ion_test)
+
+endif ()
+if (${CONFIG_COMPAT})
+    if (${CONFIG_ION})
+        add_c_source(SOURCE_FILES ${LOCAL_PATH} compat_ion)
+    endif ()
+endif ()
+if (${CONFIG_ION_TEGRA})
+    add_subdirectory(tegra)
+endif ()
+if (${CONFIG_ION_MSM})
+    add_c_source(SOURCE_FILES ${LOCAL_PATH} ion_removed_heap)
+    add_subdirectory(msm)
+endif ()
+
+add_library(drivers-staging-android-ion STATIC ${SOURCE_FILES})
+target_include_directories(drivers-staging-android-ion PRIVATE ${LOCAL_PATH})
+if (${CONFIG_ION_TEGRA})
+    target_link_libraries(drivers-staging-android-ion
+            drivers-staging-android-ion-tegra)
+endif ()
+if (${CONFIG_ION_MSM})
+    target_link_libraries(drivers-staging-android-ion
+            drivers-staging-android-ion-msm)
+endif ()

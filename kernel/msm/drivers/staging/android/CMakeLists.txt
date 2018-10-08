@@ -2,6 +2,8 @@ set(LOCAL_PATH ${KERNEL_ROOT}/drivers/staging/android)
 
 set(SOURCE_FILES "")
 
+add_subdirectory(ion)
+
 if (${CONFIG_ANDROID_BINDER_IPC})
     add_c_source(SOURCE_FILES ${LOCAL_PATH} binder)
 endif ()
@@ -37,3 +39,5 @@ add_library(drivers-staging-android STATIC ${SOURCE_FILES})
 target_include_directories(drivers-staging-android PRIVATE
         ${LOCAL_PATH}
         )
+target_link_libraries(drivers-staging-android
+        drivers-staging-android-ion)
