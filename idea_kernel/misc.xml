@@ -117,7 +117,6 @@
       <file path="$PROJECT_DIR$/msm/drivers/nfc" />
       <file path="$PROJECT_DIR$/msm/drivers/ntb" />
       <file path="$PROJECT_DIR$/msm/drivers/nubus" />
-      <file path="$PROJECT_DIR$/msm/drivers/of" />
       <file path="$PROJECT_DIR$/msm/drivers/oprofile" />
       <file path="$PROJECT_DIR$/msm/drivers/parisc" />
       <file path="$PROJECT_DIR$/msm/drivers/parport" />

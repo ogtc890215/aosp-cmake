@@ -6,3 +6,6 @@ if (${CONFIG_STAGING})
     add_subdirectory(staging)
 endif ()
 
+if (${CONFIG_OF})
+    add_subdirectory(of)
+endif()
