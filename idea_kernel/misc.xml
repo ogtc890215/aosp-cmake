@@ -51,7 +51,6 @@
       <file path="$PROJECT_DIR$/msm/drivers/ata" />
       <file path="$PROJECT_DIR$/msm/drivers/atm" />
       <file path="$PROJECT_DIR$/msm/drivers/auxdisplay" />
-      <file path="$PROJECT_DIR$/msm/drivers/base" />
       <file path="$PROJECT_DIR$/msm/drivers/bcma" />
       <file path="$PROJECT_DIR$/msm/drivers/bif" />
       <file path="$PROJECT_DIR$/msm/drivers/block" />

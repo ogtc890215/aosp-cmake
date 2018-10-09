@@ -1,5 +1,6 @@
 set(LOCAL_PATH ${KERNEL_ROOT}/drivers/staging)
 
+add_subdirectory(base)
 add_subdirectory(char)
 add_subdirectory(i2c)
 
