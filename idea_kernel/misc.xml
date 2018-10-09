@@ -90,7 +90,6 @@
       <file path="$PROJECT_DIR$/msm/drivers/hv" />
       <file path="$PROJECT_DIR$/msm/drivers/hwmon" />
       <file path="$PROJECT_DIR$/msm/drivers/hwspinlock" />
-      <file path="$PROJECT_DIR$/msm/drivers/i2c" />
       <file path="$PROJECT_DIR$/msm/drivers/ide" />
       <file path="$PROJECT_DIR$/msm/drivers/idle" />
       <file path="$PROJECT_DIR$/msm/drivers/iio" />

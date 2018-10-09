@@ -1,6 +1,7 @@
 set(LOCAL_PATH ${KERNEL_ROOT}/drivers/staging)
 
 add_subdirectory(char)
+add_subdirectory(i2c)
 
 if (${CONFIG_STAGING})
     add_subdirectory(staging)
