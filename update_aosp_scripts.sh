@@ -41,17 +41,17 @@ for file in `awk -F '[()]' '$1=="include" {print $2}' CMakeLists.txt`; do
 done
 unset dir
 
-if [ -f "${ANDROID_ROOT}/.idea/misc.xml" ]; then
-    if [ ! -d "idea_aosp" ]; then mkdir idea_aosp; fi
-    copyIfUpdated ${ANDROID_ROOT}/.idea/misc.xml idea_aosp/misc.xml
-fi
+# if [ -f "${ANDROID_ROOT}/.idea/misc.xml" ]; then
+    # if [ ! -d "idea_aosp" ]; then mkdir idea_aosp; fi
+    # copyIfUpdated ${ANDROID_ROOT}/.idea/misc.xml idea_aosp/misc.xml
+# fi
 
 KERNEL_ROOT=${ANDROID_ROOT}/kernel
 
-if [ -f "${KERNEL_ROOT}/.idea/misc.xml" ]; then
-    if [ ! -d "idea_kernel" ]; then mkdir idea_kernel; fi
-    copyIfUpdated ${KERNEL_ROOT}/.idea/misc.xml idea_kernel/misc.xml
-fi
+# if [ -f "${KERNEL_ROOT}/.idea/misc.xml" ]; then
+    # if [ ! -d "idea_kernel" ]; then mkdir idea_kernel; fi
+    # copyIfUpdated ${KERNEL_ROOT}/.idea/misc.xml idea_kernel/misc.xml
+# fi
 
 for file in `find ${KERNEL_ROOT} -type f -name CMakeLists.txt`; do
     dir=`dirname $file`
